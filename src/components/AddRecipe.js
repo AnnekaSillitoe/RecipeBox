@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component, Fragment } from "react";
 import "../css/index.css";
+import { addRecipe } from "../helpers/recipeTable";
 
 class AddRecipe extends Component {
   state = {
@@ -7,48 +8,101 @@ class AddRecipe extends Component {
       title: "",
       ingredients: [
         {
-          name: "tomatoes",
-          quantity: "2"
+          name: "",
+          quantity: ""
         }
       ],
-      method: ["",""],
-      photo: ""
-    },
-    title: "",
-    ingredient: {
-      name: "tomatoes",
-      quantity: "2"
-    },
-    method: ""
+      method: [""],
+      photo: " "
+    }
   };
 
-  onChange = (event) => {
-    const update = [event.target.name] = event.target.value;
-
+  onChange = event => {
+    const recipe = Object.assign({}, this.state.recipe);
+    if (event.target.name.includes("ingredient")) {
+      const ingredientKey = event.target.name.split(".")[1];
+      const ingredientNumber = event.target.name.split(".")[2];
+      recipe.ingredients[ingredientNumber][ingredientKey] = event.target.value;
+    } else if (event.target.name.includes("method")) {
+      const item = event.target.name.split(".")[1];
+      recipe.method[item] = event.target.value;
+    } else {
+      recipe.title = event.target.value;
+    }
     this.setState({
-      [event.target.name]: update
+      recipe
     });
-    console.log(this.state[event.target.name]);
+  };
+
+  addIngredientsBox = () => {
+    const recipe = Object.assign({}, this.state.recipe);
+    recipe.ingredients.push({
+      name: "",
+      quantity: ""
+    });
+    this.setState({
+      recipe
+    });
+  };
+
+  addMethodBox = () => {
+    const recipe = Object.assign({}, this.state.recipe);
+    recipe.method.push("");
+    this.setState({
+      recipe
+    });
   };
 
   render() {
-    const {recipe, title, ingredient, method} = this.state;
+    const { recipe } = this.state;
     return (
       <div className="mt-5">
         <header>Add a recipe</header>
         <div className="mt-3">
           <label>Title</label>
-          <input name="title" placeholder="Title" value={title} onChange={this.onChange}/>
+          <input
+            name="title"
+            placeholder="Title"
+            value={recipe.title}
+            onChange={this.onChange}
+          />
         </div>
         <div>
           <label>Ingredients</label>
-          <input placeholder="Item"/>
-          <input placeholder="Quantity"/>
+          {recipe.ingredients.map((ingredient, index) => (
+            <Fragment key={index}>
+              <input
+                name={`ingredient.name.${index}`}
+                placeholder={`Name ${index + 1}`}
+                value={ingredient.name}
+                onChange={this.onChange}
+              />
+              <input
+                name={`ingredient.quantity.${index}`}
+                placeholder={`Quantity`}
+                value={ingredient.quantity}
+                onChange={this.onChange}
+              />
+            </Fragment>
+          ))}
+          <button onClick={count => this.addIngredientsBox(count)}>
+            Add items
+          </button>
         </div>
         <div>
           <label>Method</label>
-          <input name="method" placeholder="Step" value={method} onChange={this.onChange}/>
+          {recipe.method.map((method, index) => (
+            <input
+              name={`method.${index}`}
+              key={index}
+              placeholder={`Step ${index + 1}`}
+              value={method}
+              onChange={this.onChange}
+            />
+          ))}
+          <button onClick={count => this.addMethodBox(count)}>Add items</button>
         </div>
+        <button onClick={() => addRecipe(this.state.recipe)}>Submit</button>
       </div>
     );
   }
