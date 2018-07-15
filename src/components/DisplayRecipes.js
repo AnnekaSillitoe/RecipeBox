@@ -21,13 +21,13 @@ class DisplayRecipes extends Component {
     return (
       <div className="mt-5">
         {recipes.length > 0 && (
-          <Fragment>
+          <div className="ml-5">
             {recipes.map((recipe, index) => (
               <Fragment key={index}>
-                <div onClick={() => displayRecipe(recipe.recipe_id)}>{recipe.recipe.title}</div>
+                <h5 className="cursor-pointer" onClick={() => displayRecipe(recipe.recipe_id)}>{recipe.recipe.title}</h5>
               </Fragment>
             ))}
-          </Fragment>
+          </div>
         )}
       </div>
     );

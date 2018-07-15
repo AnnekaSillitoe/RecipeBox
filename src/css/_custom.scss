@@ -1,8 +1,4 @@
-@import "node_modules/bootstrap/scss/bootstrap";
-
-.App {
-  text-align: center;
-}
+@import "~bootstrap/scss/bootstrap";
 
 .App-header {
   background-color: #222;
@@ -12,6 +8,7 @@
 }
 
 .App-title {
+  text-align: center;
   font-size: 1.5em;
 }
 
@@ -19,4 +16,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

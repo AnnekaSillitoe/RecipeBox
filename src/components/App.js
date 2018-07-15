@@ -16,6 +16,13 @@ class App extends Component {
     })
   };
 
+  redirectBack = (location) => {
+    const display = location === "addRecipe" ? "displayAdd" : "displayRecipe";
+    this.setState({
+      [display]: false
+    });
+  };
+
   render() {
     const { displayAdd, displayRecipe } = this.state;
     return (
@@ -27,15 +34,15 @@ class App extends Component {
         <Fragment>
         {!displayAdd && (
           <div className="mt-5">
-            <button onClick={() => this.setState({ displayAdd: true })}>
+            <button className="btn btn-dark float-right mr-3" onClick={() => this.setState({ displayAdd: true })}>
               Add recipe
             </button>
           </div>
         )}
-        {displayAdd && <AddRecipe />}
+        {displayAdd && <AddRecipe redirectBack={this.redirectBack}/>}
         {!displayAdd && <DisplayRecipes displayRecipe={this.displayRecipe} />}
         </Fragment>}
-        {typeof displayRecipe === "string" && <DisplayRecipe recipeId={displayRecipe} />}
+        {typeof displayRecipe === "string" && <DisplayRecipe recipeId={displayRecipe} redirectBack={this.redirectBack}/>}
       </div>
     );
   }
