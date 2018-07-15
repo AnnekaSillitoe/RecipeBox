@@ -129,7 +129,7 @@ class AddRecipe extends Component {
               </button>
             </div>
           </div>
-          <button className="btn btn-dark" onClick={() => addRecipe(this.state.recipe)}>Submit</button>
+          <button className="btn btn-dark" onClick={(e) => addRecipe(this.state.recipe, e)}>Submit</button>
         </form>
       </div>
     );
