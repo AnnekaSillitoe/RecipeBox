@@ -1,7 +1,8 @@
 import AWS from "aws-sdk";
 import {generateUUID} from "./helpers";
 
-export async function addRecipe(recipe) {
+export async function addRecipe(recipe, e) {
+  e.preventDefault();
   AWS.config.update({
     region: "eu-west-2",
     credentials: {
@@ -37,4 +38,25 @@ export async function getAllRecipes() {
   };
 
   return await docClient.scan(params).promise();
+}
+
+export async function getRecipe(recipeId) {
+  AWS.config.update({
+    region: "eu-west-2",
+    credentials: {
+      accessKeyId: process.env.REACT_APP_ACCESS_KEY,
+      secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY
+    }
+  });
+  const docClient = await new AWS.DynamoDB.DocumentClient();
+  const params = {
+    TableName: "RecipeBox",
+    KeyConditionExpression: "recipe_id = :recipe_id",
+    ExpressionAttributeValues: {
+      ":recipe_id": recipeId
+    },
+    Select: "ALL_ATTRIBUTES"
+  };
+
+  return await docClient.query(params).promise();
 }

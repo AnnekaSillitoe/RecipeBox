@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import "../css/index.css";
 import { addRecipe } from "../helpers/recipeTable";
 
@@ -55,54 +55,82 @@ class AddRecipe extends Component {
 
   render() {
     const { recipe } = this.state;
+    const { redirectBack } = this.props;
     return (
       <div className="mt-5">
-        <header>Add a recipe</header>
-        <div className="mt-3">
-          <label>Title</label>
-          <input
-            name="title"
-            placeholder="Title"
-            value={recipe.title}
-            onChange={this.onChange}
-          />
-        </div>
-        <div>
-          <label>Ingredients</label>
-          {recipe.ingredients.map((ingredient, index) => (
-            <Fragment key={index}>
+        <button
+          className="btn btn-outline-dark ml-5"
+          onClick={() => redirectBack("addRecipe")}
+        >
+          Back
+        </button>
+        <form
+          className="text-center container"
+          onSubmit={(e) => addRecipe(this.state.recipe, e)}
+        >
+          <h2>Add a recipe</h2>
+          <div className="mt-3">
+            <div className="form-group">
+              <label htmlFor="titleInput">Title</label>
               <input
-                name={`ingredient.name.${index}`}
-                placeholder={`Name ${index + 1}`}
-                value={ingredient.name}
+                className="form-control"
+                name="title"
+                placeholder="Title"
+                value={recipe.title}
                 onChange={this.onChange}
               />
-              <input
-                name={`ingredient.quantity.${index}`}
-                placeholder={`Quantity`}
-                value={ingredient.quantity}
-                onChange={this.onChange}
-              />
-            </Fragment>
-          ))}
-          <button onClick={count => this.addIngredientsBox(count)}>
-            Add items
-          </button>
-        </div>
-        <div>
-          <label>Method</label>
-          {recipe.method.map((method, index) => (
-            <input
-              name={`method.${index}`}
-              key={index}
-              placeholder={`Step ${index + 1}`}
-              value={method}
-              onChange={this.onChange}
-            />
-          ))}
-          <button onClick={count => this.addMethodBox(count)}>Add items</button>
-        </div>
-        <button onClick={() => addRecipe(this.state.recipe)}>Submit</button>
+            </div>
+          </div>
+          <div>
+            <label>Ingredients</label>
+            <div className="form-group">
+              {recipe.ingredients.map((ingredient, index) => (
+                <div className="form-row mb-2" key={index}>
+                  <input
+                    className="form-control col-8"
+                    name={`ingredient.name.${index}`}
+                    placeholder={`Name ${index + 1}`}
+                    value={ingredient.name}
+                    onChange={this.onChange}
+                  />
+                  <input
+                    className="form-control col-3 offset-1"
+                    name={`ingredient.quantity.${index}`}
+                    placeholder={`Quantity`}
+                    value={ingredient.quantity}
+                    onChange={this.onChange}
+                  />
+                </div>
+              ))}
+              <button
+                className="btn btn-outline-dark"
+                onClick={count => this.addIngredientsBox(count)}>
+                Add items
+              </button>
+            </div>
+          </div>
+          <div>
+            <label>Method</label>
+            <div className="form-group">
+              {recipe.method.map((method, index) => (
+                <input
+                  className="form-control mb-2"
+                  name={`method.${index}`}
+                  key={index}
+                  placeholder={`Step ${index + 1}`}
+                  value={method}
+                  onChange={this.onChange}
+                />
+              ))}
+              <button
+                className="btn btn-outline-dark"
+                onClick={count => this.addMethodBox(count)}>
+                Add Step
+              </button>
+            </div>
+          </div>
+          <button className="btn btn-dark" onClick={() => addRecipe(this.state.recipe)}>Submit</button>
+        </form>
       </div>
     );
   }
