@@ -33,11 +33,9 @@ class App extends Component {
         {!displayRecipe &&
         <Fragment>
         {!displayAdd && (
-          <div className="mt-5">
-            <button className="btn btn-dark float-right mr-3" onClick={() => this.setState({ displayAdd: true })}>
+            <button className="btn btn-dark float-right mt-1 mr-3" onClick={() => this.setState({ displayAdd: true })}>
               Add recipe
             </button>
-          </div>
         )}
         {displayAdd && <AddRecipe redirectBack={this.redirectBack}/>}
         {!displayAdd && <DisplayRecipes displayRecipe={this.displayRecipe} />}
