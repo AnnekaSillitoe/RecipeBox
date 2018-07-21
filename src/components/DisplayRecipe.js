@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import "../css/index.css";
 import { getRecipe } from "../helpers/recipeTable";
+import ButtonOutline from "./Buttons/ButtonOutline/ButtonOutline";
 
 class DisplayRecipe extends Component {
   state = {
@@ -20,12 +21,7 @@ class DisplayRecipe extends Component {
     const { redirectBack } = this.props;
     return (
       <Fragment>
-        <button
-          className="btn btn-outline-dark ml-2 mt-1"
-          onClick={() => redirectBack("displayRecipe")}
-        >
-          Back
-        </button>
+        <ButtonOutline buttonClasses="ml-2 mt-1" onClick={() => redirectBack("displayRecipe")} buttonText="Back"/>
         <div className="mt-2">
           {Object.keys(recipe).length > 0 && (
             <div className="container">

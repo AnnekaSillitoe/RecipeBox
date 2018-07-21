@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import "../css/index.css";
 import { addRecipe } from "../helpers/recipeTable";
+import ButtonOutline from "./Buttons/ButtonOutline/ButtonOutline";
 
 class AddRecipe extends Component {
   state = {
@@ -61,12 +62,7 @@ class AddRecipe extends Component {
     const { redirectBack } = this.props;
     return (
       <Fragment>
-        <button
-          className="btn btn-outline-dark ml-2 mt-1"
-          onClick={() => redirectBack("addRecipe")}
-        >
-          Back
-        </button>
+        <ButtonOutline buttonClasses="ml-2 mt-1" onClick={() => redirectBack("addRecipe")} buttonText="Back"/>
         <div className="mt-2">
           <form
             className="text-center container"
@@ -106,12 +102,7 @@ class AddRecipe extends Component {
                     />
                   </div>
                 ))}
-                <button
-                  className="btn btn-outline-dark"
-                  onClick={(e) => this.addIngredientsBox(e)}
-                >
-                  Add items
-                </button>
+                <ButtonOutline onClick={(e) => this.addIngredientsBox(e)} buttonText="Add Items"/>
               </div>
             </div>
             <div>
@@ -127,12 +118,7 @@ class AddRecipe extends Component {
                     onChange={this.onChange}
                   />
                 ))}
-                <button
-                  className="btn btn-outline-dark"
-                  onClick={(e) => this.addMethodBox(e)}
-                >
-                  Add Step
-                </button>
+                <ButtonOutline onClick={(e) => this.addMethodBox(e)} buttonText="Add Step"/>
               </div>
             </div>
             <button

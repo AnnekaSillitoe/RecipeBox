@@ -1,8 +1,10 @@
 import React, {Component, Fragment} from "react";
-import "../css/index.css";
-import AddRecipe from "./AddRecipe";
-import DisplayRecipes from "./DisplayRecipes";
-import DisplayRecipe from "./DisplayRecipe";
+import "../../css/index.css";
+import AddRecipe from "../AddRecipe";
+import DisplayRecipes from "../DisplayRecipes";
+import DisplayRecipe from "../DisplayRecipe";
+import Header from "../Header/Header";
+import ButtonPrimary from "../Buttons/ButtonPrimary/ButtonPrimary";
 
 class App extends Component {
   state = {
@@ -23,19 +25,19 @@ class App extends Component {
     });
   };
 
+  displayAddRecipe = () => {
+    this.setState({ displayAdd: true })
+  };
+
   render() {
     const { displayAdd, displayRecipe } = this.state;
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Recipes</h1>
-        </header>
+        <Header/>
         {!displayRecipe &&
         <Fragment>
         {!displayAdd && (
-            <button className="btn btn-dark float-right mt-1 mr-3" onClick={() => this.setState({ displayAdd: true })}>
-              Add recipe
-            </button>
+          <ButtonPrimary onClick={this.displayAddRecipe} buttonText="Add a recipe"/>
         )}
         {displayAdd && <AddRecipe redirectBack={this.redirectBack}/>}
         {!displayAdd && <DisplayRecipes displayRecipe={this.displayRecipe} />}
