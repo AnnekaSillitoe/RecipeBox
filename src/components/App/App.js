@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import "../../css/index.css";
 import AddRecipe from "../AddRecipe";
 import DisplayRecipes from "../DisplayRecipes";
 import DisplayRecipe from "../DisplayRecipe";
