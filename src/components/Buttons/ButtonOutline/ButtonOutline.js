@@ -1,11 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ButtonOutline = ({ buttonClasses="", onClick, buttonText="" }) => (
-  <button
-    className={"btn btn-outline-dark " + buttonClasses}
-    onClick={onClick}
-  >
+const ButtonOutline = ({ buttonClasses = "", onClick, buttonText = "" }) => (
+  <button className={"btn btn-outline-dark " + buttonClasses} onClick={onClick}>
     {buttonText}
   </button>
 );

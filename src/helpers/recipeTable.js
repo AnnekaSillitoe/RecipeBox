@@ -1,5 +1,5 @@
 import AWS from "aws-sdk";
-import {generateUUID} from "./helpers";
+import { generateUUID } from "./helpers";
 
 export async function addRecipe(recipe) {
   AWS.config.update({
@@ -13,12 +13,11 @@ export async function addRecipe(recipe) {
   const docClient = await new AWS.DynamoDB.DocumentClient();
   const params = {
     TableName: "RecipeBox",
-    Item:{
-      "recipe_id": uuid,
-      "recipe": recipe
+    Item: {
+      recipe_id: uuid,
+      recipe: recipe
     }
   };
-
 
   return await docClient.put(params).promise();
 }

@@ -15,16 +15,15 @@ test("ButtonPrimary renders correctly", () => {
 });
 
 test("When clicking the button, it triggers the onClick", () => {
-  const button = shallow(<ButtonPrimary {...props}  />);
+  const button = shallow(<ButtonPrimary {...props} />);
 
   button.simulate("click");
 
   expect(mockEvent.mock.calls.length).toEqual(1);
 });
 
-
 it("renders text passed through text prop", () => {
-  const button = shallow(<ButtonPrimary {...props}  />);
+  const button = shallow(<ButtonPrimary {...props} />);
   expect(button.text()).toBe("Recipes");
 });
 

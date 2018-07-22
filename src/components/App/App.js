@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from "react";
+import React, { Component, Fragment } from "react";
 import "../../css/index.css";
 import AddRecipe from "../AddRecipe";
 import DisplayRecipes from "../DisplayRecipes";
@@ -12,13 +12,13 @@ class App extends Component {
     displayRecipe: null
   };
 
-  displayRecipe = (recipeId) => {
+  displayRecipe = recipeId => {
     this.setState({
-      displayRecipe: recipeId,
-    })
+      displayRecipe: recipeId
+    });
   };
 
-  redirectBack = (location) => {
+  redirectBack = location => {
     const display = location === "addRecipe" ? "displayAdd" : "displayRecipe";
     this.setState({
       [display]: false
@@ -26,23 +26,35 @@ class App extends Component {
   };
 
   displayAddRecipe = () => {
-    this.setState({ displayAdd: true })
+    this.setState({ displayAdd: true });
   };
 
   render() {
     const { displayAdd, displayRecipe } = this.state;
     return (
       <div className="App">
-        <Header/>
-        {!displayRecipe &&
-        <Fragment>
-        {!displayAdd && (
-          <ButtonPrimary buttonClasses="float-right mt-1 mr-3" onClick={this.displayAddRecipe} buttonText="Add a recipe"/>
+        <Header />
+        {!displayRecipe && (
+          <Fragment>
+            {!displayAdd && (
+              <ButtonPrimary
+                buttonClasses="float-right mt-1 mr-3"
+                onClick={this.displayAddRecipe}
+                buttonText="Add a recipe"
+              />
+            )}
+            {displayAdd && <AddRecipe redirectBack={this.redirectBack} />}
+            {!displayAdd && (
+              <DisplayRecipes displayRecipe={this.displayRecipe} />
+            )}
+          </Fragment>
         )}
-        {displayAdd && <AddRecipe redirectBack={this.redirectBack}/>}
-        {!displayAdd && <DisplayRecipes displayRecipe={this.displayRecipe} />}
-        </Fragment>}
-        {typeof displayRecipe === "string" && <DisplayRecipe recipeId={displayRecipe} redirectBack={this.redirectBack}/>}
+        {typeof displayRecipe === "string" && (
+          <DisplayRecipe
+            recipeId={displayRecipe}
+            redirectBack={this.redirectBack}
+          />
+        )}
       </div>
     );
   }

@@ -21,7 +21,11 @@ class DisplayRecipe extends Component {
     const { redirectBack } = this.props;
     return (
       <Fragment>
-        <ButtonOutline buttonClasses="ml-2 mt-1" onClick={() => redirectBack("displayRecipe")} buttonText="Back"/>
+        <ButtonOutline
+          buttonClasses="ml-2 mt-1"
+          onClick={() => redirectBack("displayRecipe")}
+          buttonText="Back"
+        />
         <div className="mt-2">
           {Object.keys(recipe).length > 0 && (
             <div className="container">
