@@ -1,12 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ButtonPrimary renders correctly 1`] = `
+exports[`InputField renders correctly 1`] = `
 ShallowWrapper {
   "length": 1,
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <ButtonPrimary
-    buttonText="Recipes"
-    onClick={[Function]}
+  Symbol(enzyme.__unrendered__): <InputField
+    id="recipe"
+    onChange={[Function]}
+    value="A New Recipe"
 />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
@@ -20,13 +21,16 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": "Recipes",
-      "className": "btn btn-dark ",
-      "onClick": [Function],
+      "className": "form-control ",
+      "id": "recipe",
+      "name": "",
+      "onChange": [Function],
+      "placeholder": "",
+      "value": "A New Recipe",
     },
     "ref": null,
-    "rendered": "Recipes",
-    "type": "button",
+    "rendered": null,
+    "type": "input",
   },
   Symbol(enzyme.__nodes__): Array [
     Object {
@@ -34,13 +38,16 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "children": "Recipes",
-        "className": "btn btn-dark ",
-        "onClick": [Function],
+        "className": "form-control ",
+        "id": "recipe",
+        "name": "",
+        "onChange": [Function],
+        "placeholder": "",
+        "value": "A New Recipe",
       },
       "ref": null,
-      "rendered": "Recipes",
-      "type": "button",
+      "rendered": null,
+      "type": "input",
     },
   ],
   Symbol(enzyme.__options__): Object {

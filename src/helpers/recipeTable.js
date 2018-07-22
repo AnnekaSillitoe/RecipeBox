@@ -1,8 +1,7 @@
 import AWS from "aws-sdk";
 import {generateUUID} from "./helpers";
 
-export async function addRecipe(recipe, e) {
-  e.preventDefault();
+export async function addRecipe(recipe) {
   AWS.config.update({
     region: "eu-west-2",
     credentials: {
