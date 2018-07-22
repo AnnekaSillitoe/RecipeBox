@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import "../css/index.css";
 import { getRecipe } from "../helpers/recipeTable";
 import ButtonOutline from "./Buttons/ButtonOutline/ButtonOutline";
 
