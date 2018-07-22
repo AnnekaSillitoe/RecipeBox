@@ -1,10 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ButtonPrimary = ({ buttonClasses="", onClick, buttonText="" }) => (
-  <button
-    className={"btn btn-dark " + buttonClasses}
-    onClick={ onClick }>
+const ButtonPrimary = ({ buttonClasses = "", onClick, buttonText = "" }) => (
+  <button className={"btn btn-dark " + buttonClasses} onClick={onClick}>
     {buttonText}
   </button>
 );

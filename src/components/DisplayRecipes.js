@@ -24,7 +24,12 @@ class DisplayRecipes extends Component {
           <div className="ml-2">
             {recipes.map((recipe, index) => (
               <Fragment key={index}>
-                <h5 className="cursor-pointer" onClick={() => displayRecipe(recipe.recipe_id)}>{recipe.recipe.title}</h5>
+                <h5
+                  className="cursor-pointer"
+                  onClick={() => displayRecipe(recipe.recipe_id)}
+                >
+                  {recipe.recipe.title}
+                </h5>
               </Fragment>
             ))}
           </div>

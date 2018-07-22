@@ -1,14 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const InputField = ({ id="", inputClasses="", onChange, name="", value="", placeholder="" }) => (
+const InputField = ({
+  id = "",
+  inputClasses = "",
+  onChange,
+  name = "",
+  value = "",
+  placeholder = ""
+}) => (
   <input
     id={id}
     className={"form-control " + inputClasses}
     name={name}
     placeholder={placeholder}
     value={value}
-    onChange={onChange}/>
+    onChange={onChange}
+  />
 );
 
 InputField.propTypes = {

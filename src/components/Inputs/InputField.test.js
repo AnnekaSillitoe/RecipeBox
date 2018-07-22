@@ -17,28 +17,30 @@ test("InputField renders correctly", () => {
 
 describe("Props are displayed when passed to InputField", () => {
   test("A placeholder is displayed", () => {
-    const input = shallow(<InputField {...props} placeholder="This is placeholder text"/>);
+    const input = shallow(
+      <InputField {...props} placeholder="This is placeholder text" />
+    );
 
     expect(input.props().placeholder).toBe("This is placeholder text");
   });
 
   test("An id prop is available", () => {
-    const input = shallow(<InputField {...props} id="new id"/>);
+    const input = shallow(<InputField {...props} id="new id" />);
 
     expect(input.props().id).toBe("new id");
   });
 
   test("An class prop is included", () => {
-    const input = shallow(<InputField {...props} inputClasses="blue"/>);
+    const input = shallow(<InputField {...props} inputClasses="blue" />);
 
     expect(input.props().className).toEqual(expect.stringContaining("blue"));
   });
 });
 
 test("onChange has been called", () => {
-    const input = shallow(<InputField {...props}/>);
+  const input = shallow(<InputField {...props} />);
 
-    expect(input.props().onChange).not.toHaveBeenCalled();
-    input.find('input').simulate('change');
-    expect(input.props().onChange).toHaveBeenCalled();
+  expect(input.props().onChange).not.toHaveBeenCalled();
+  input.find("input").simulate("change");
+  expect(input.props().onChange).toHaveBeenCalled();
 });
