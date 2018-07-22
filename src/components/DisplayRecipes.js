@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import "../css/index.css";
 import { getAllRecipes } from "../helpers/recipeTable";
 
 class DisplayRecipes extends Component {
