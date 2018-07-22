@@ -37,7 +37,7 @@ class App extends Component {
         {!displayRecipe &&
         <Fragment>
         {!displayAdd && (
-          <ButtonPrimary onClick={this.displayAddRecipe} buttonText="Add a recipe"/>
+          <ButtonPrimary buttonClasses="float-right mt-1 mr-3" onClick={this.displayAddRecipe} buttonText="Add a recipe"/>
         )}
         {displayAdd && <AddRecipe redirectBack={this.redirectBack}/>}
         {!displayAdd && <DisplayRecipes displayRecipe={this.displayRecipe} />}

@@ -27,3 +27,8 @@ it("renders text passed through text prop", () => {
   const button = shallow(<ButtonPrimary {...props}  />);
   expect(button.text()).toBe("Recipes");
 });
+
+test("handles classNames passed in through props", () => {
+  const button = shallow(<ButtonPrimary {...props} buttonClasses="blue" />);
+  expect(button.props().className).toEqual(expect.stringContaining("blue"));
+});
