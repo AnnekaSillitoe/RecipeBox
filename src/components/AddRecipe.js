@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from "react";
 import cloneDeep from "lodash.clonedeep";
 import { addRecipe } from "../helpers/recipeTable";
+import { addImage } from "../helpers/bucket";
 import ButtonOutline from "./Buttons/ButtonOutline/ButtonOutline";
 import { AlertList } from "react-bs-notifier";
 import ButtonPrimary from "./Buttons/ButtonPrimary/ButtonPrimary";
 import InputField from "./Inputs/InputField";
+import AddImage from "./AddImage";
 
 class AddRecipe extends Component {
   constructor() {
@@ -22,7 +24,9 @@ class AddRecipe extends Component {
     };
     this.state = {
       recipe: cloneDeep(this.recipe),
-      alert: []
+      alert: [],
+      image: null,
+      imageFile: null
     };
   }
 
@@ -72,6 +76,22 @@ class AddRecipe extends Component {
     });
   };
 
+  displayImage = event => {
+    event.preventDefault();
+    this.setState({
+      image: URL.createObjectURL(event.target.files[0]),
+      imageFile: event.target.files[0]
+    });
+  };
+
+  deleteImage = event => {
+    event.preventDefault();
+    this.setState({
+      image: null,
+      imageFile: null
+    });
+  };
+
   addNewRecipe = e => {
     e.preventDefault();
     let message;
@@ -100,13 +120,42 @@ class AddRecipe extends Component {
     ];
 
     added
-      .then(() => {
-        message = "You recipe has been added successfully.";
-        alerts[1].message = message;
-        this.setState({
-          alert: [alerts[1]]
-        });
-        this.resetForm();
+      .then(data => {
+        if (this.state.image !== null) {
+          const addedImage = addImage(
+            this.state.imageFile,
+            data["$response"].request.params.Item.recipe_id.S
+          );
+          addedImage
+            .then(() => {
+              message = "You recipe has been added successfully.";
+              alerts[1].message = message;
+              this.setState({
+                alert: [alerts[1]],
+                image: null,
+                imageFile: null
+              });
+              this.resetForm();
+            })
+            .catch(err => {
+              message = err.message;
+              alerts[0].message = message;
+              this.setState({
+                alert: [alerts[0]],
+                image: null,
+                imageFile: null
+              });
+            });
+        } else {
+          message = "You recipe has been added successfully.";
+          alerts[1].message = message;
+          this.setState({
+            alert: [alerts[1]],
+            image: null,
+            imageFile: null
+          });
+          this.resetForm();
+        }
       })
       .catch(err => {
         message = err.message;
@@ -122,7 +171,7 @@ class AddRecipe extends Component {
   };
 
   render() {
-    const { recipe } = this.state;
+    const { recipe, image } = this.state;
     const { redirectBack } = this.props;
     return (
       <Fragment>
@@ -205,6 +254,13 @@ class AddRecipe extends Component {
                   buttonText="Add Step"
                 />
               </div>
+              <label htmlFor="image">Image</label>
+              <AddImage
+                id="image"
+                displayImage={this.displayImage}
+                image={image}
+                deleteImage={this.deleteImage}
+              />
             </div>
             <ButtonPrimary
               onClick={e => this.addNewRecipe(e)}

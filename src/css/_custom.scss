@@ -1,7 +1,15 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 
+.upload-input.custom-file-input {
+  z-index: 200;
+}
+
+.custom-file-label:after {
+  background-color: transparent !important;
+}
+
 .App-header {
-  background-color: #222;
+  background-color: #343a40;
   height: 60px;
   padding: 20px;
   color: white;
